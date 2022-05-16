@@ -1,0 +1,218 @@
+{
+    "description": "A New Flow",
+    "states": [
+      {
+        "name": "Trigger",
+        "type": "trigger",
+        "transitions": [
+          {
+            "next": "welcome",
+            "event": "incomingMessage"
+          },
+          {
+            "event": "incomingCall"
+          },
+          {
+            "event": "incomingRequest"
+          },
+          {
+            "event": "incomingParent"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      {
+        "name": "welcome",
+        "type": "send-and-wait-for-reply",
+        "transitions": [
+          {
+            "next": "split_1",
+            "event": "incomingMessage"
+          },
+          {
+            "event": "timeout"
+          },
+          {
+            "event": "deliveryFailure"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": -80,
+            "y": 230
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "body": "Are you afraid of No Code? 😱",
+          "timeout": "3600"
+        }
+      },
+      {
+        "name": "split_1",
+        "type": "split-based-on",
+        "transitions": [
+          {
+            "next": "happy",
+            "event": "noMatch"
+          },
+          {
+            "next": "sad",
+            "event": "match",
+            "conditions": [
+              {
+                "friendly_name": "If value starts_with y",
+                "arguments": [
+                  "{{widgets.welcome.inbound.Body}}"
+                ],
+                "type": "starts_with",
+                "value": "y"
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "input": "{{widgets.welcome.inbound.Body}}",
+          "offset": {
+            "x": -80,
+            "y": 490
+          }
+        }
+      },
+      {
+        "name": "sad",
+        "type": "send-message",
+        "transitions": [
+          {
+            "next": "quickly",
+            "event": "sent"
+          },
+          {
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 200,
+            "y": 700
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "to": "{{contact.channel.address}}",
+          "body": "Oh no! 😢 That's too sad"
+        }
+      },
+      {
+        "name": "happy",
+        "type": "send-message",
+        "transitions": [
+          {
+            "next": "quickly",
+            "event": "sent"
+          },
+          {
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": -250,
+            "y": 730
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "to": "{{contact.channel.address}}",
+          "body": "I couldn't agree more with what you said: {{widgets.welcome.inbound.Body}}"
+        }
+      },
+      {
+        "name": "quickly",
+        "type": "send-and-wait-for-reply",
+        "transitions": [
+          {
+            "next": "send_message_3",
+            "event": "incomingMessage"
+          },
+          {
+            "next": "double_check",
+            "event": "timeout"
+          },
+          {
+            "event": "deliveryFailure"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": -230,
+            "y": 1000
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "body": "Really quickly tell me how you would maintain state, and what your estimate is for how long it would take",
+          "timeout": "10"
+        }
+      },
+      {
+        "name": "send_message_3",
+        "type": "send-message",
+        "transitions": [
+          {
+            "event": "sent"
+          },
+          {
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": -280,
+            "y": 1230
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "to": "{{contact.channel.address}}",
+          "body": "Wow you must be a 10x developer"
+        }
+      },
+      {
+        "name": "double_check",
+        "type": "send-and-wait-for-reply",
+        "transitions": [
+          {
+            "next": "welcome",
+            "event": "incomingMessage"
+          },
+          {
+            "event": "timeout"
+          },
+          {
+            "event": "deliveryFailure"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 340,
+            "y": 1050
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "body": "Would you like more time to focus on your business logic?",
+          "timeout": "3600"
+        }
+      }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+      "allow_concurrent_calls": true
+    }
+  }
