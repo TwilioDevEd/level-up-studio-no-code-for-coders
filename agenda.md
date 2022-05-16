@@ -1,4 +1,4 @@
-lear# Level Up: Studio for Coders
+# Level Up: Studio for Coders
 
 - [ ] This will be recorded and shared with you
 - [ ] 🎸 Be Excellent To Everyone!
