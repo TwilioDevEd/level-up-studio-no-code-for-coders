@@ -2,6 +2,7 @@
 
 - [ ] This will be recorded and shared with you
 - [ ] 🎸 Be Excellent To Everyone!
+- [ ] Ask questions (Choose Everyone)
 
 ## No Code?
 
@@ -16,13 +17,13 @@
 
 ## Getting Started 🎯
 
-- [ ] Terminology 📚
+- [ ] 📚 Terminology 
   - [ ] Flow
   - [ ] Canvas
   - [ ] Triggers
   - [ ] Widgets
   - [ ] Transitions
-- [ ] 🗣 Liquid templating language
+- [ ] 🧋 Liquid templating language
 - [ ] ⏱ Timeouts!
 - [ ] 🔁 Looping and stuck executions
 - [ ] 🌤 Deploying
@@ -32,6 +33,7 @@
 - [ ] 💡 Innovation
 - [ ] Gathering input
 - [ ] 📞 Conference call
+- [ ] 📝 Transcription
 - [ ] 🕵️ Exploration
 - [ ] It's really **just** TwiML
 - [ ] 👩‍💻 Putting the Code in No Code
@@ -39,6 +41,6 @@
 
 ## Advanced
 
-- [ ] Templates
-- [ ] 💪 Export / Import and the Flows API
-- [ ] Validating HTTP requests
+- [x] Templates
+- [x] 💪 Export / Import and the Flows API
+- [x] Validating HTTP requests
